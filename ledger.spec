@@ -2,7 +2,7 @@
 
 Name:             ledger
 Version:          3.1.1
-Release:          bdeddff2%{?dist}
+Release:          1%{?dist}
 Summary:          A powerful command-line double-entry accounting system
 License:          BSD
 URL:              http://ledger-cli.org/
@@ -101,5 +101,5 @@ done
 %{_libdir}/libledger.so
 
 %changelog
-* Sat Jan 05 2019 Renaud Casenave-Péré <renaud@casenave-pere.fr> - 3.1.1-bdeddff2
+* Sun Jan 06 2019 Renaud Casenave-Péré <renaud@casenave-pere.fr> - 3.1.1-1
 - Initial release for sailfishos
