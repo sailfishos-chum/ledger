@@ -29,6 +29,13 @@ from the UNIX command-line. This may put off some users as there is
 no flashy UI but for those who want unparalleled reporting access to
 their data, there really is no alternative.
 
+%package -n python2-ledger
+Provides: python2-ledger
+Summary: Python bindings for %{name}
+Requires: %{name} = %{version}-%{release}
+%description -n python2-ledger
+Python bindings for ledger.
+
 %package devel
 Summary: Libraries and header files for %{name} development
 Requires: %{name} = %{version}-%{release}
@@ -39,10 +46,11 @@ Libraries and header files for %{name} development.
 %setup -qn %{name}-%{version}
 
 %build
-python ./acprep --no-git --prefix=%{_prefix} update
+python ./acprep --no-git --python --prefix=%{_prefix} update
 
 %install
 make install DESTDIR=%{buildroot}
+chmod +x %{buildroot}%{_libdir}/python2.7/site-packages/ledger.so
 
 # Bash completion
 mkdir -p %{buildroot}%{_sysconfdir}/bash_completion.d
@@ -57,6 +65,10 @@ mkdir -p %{buildroot}%{_pkgdocdir}/contrib
 for i in bal bal-huquq entry getquote.pl getquote-uk.py ledger-du ParseCcStmt.cs README repl.sh report tc ti to trend; do
     install -p -m0644 contrib/${i} %{buildroot}%{_pkgdocdir}/contrib/${i}
 done
+
+# Python example
+mkdir -p %{buildroot}%{_pkgdocdir}/python
+install -p -m0644 python/demo.py %{buildroot}%{_pkgdocdir}/python/demo.py
 
 # Input samples
 mkdir -p %{buildroot}%{_pkgdocdir}/samples
@@ -79,6 +91,10 @@ done
 %{_mandir}/man1/ledger.1*
 %config(noreplace) %{_sysconfdir}/bash_completion.d/ledger
 %license LICENSE.md
+
+%files -n python2-ledger
+%doc %{_pkgdocdir}/python
+%{_libdir}/python2.7/site-packages/ledger.so
 
 %files devel
 %{_includedir}/ledger
