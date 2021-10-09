@@ -17,7 +17,7 @@ BuildRequires:    gettext-devel
 BuildRequires:    gmp-devel
 BuildRequires:    libedit-devel
 BuildRequires:    mpfr-devel
-BuildRequires:    /usr/bin/python
+BuildRequires:    python3-base
 
 Requires(post):   /sbin/ldconfig
 Requires(postun): /sbin/ldconfig
@@ -38,7 +38,7 @@ Libraries and header files for %{name} development.
 %setup -qn %{name}-%{version}/ledger
 
 %build
-python ./acprep --no-git --prefix=%{_prefix} update
+python3 ./acprep --no-git --prefix=%{_prefix} update
 
 %install
 make install DESTDIR=%{buildroot}
@@ -53,13 +53,13 @@ rm -rf %{buildroot}%{_docdir}
 
 # Contrib scripts
 mkdir -p %{buildroot}%{_pkgdocdir}/contrib
-for i in bal bal-huquq entry getquote.pl getquote-uk.py ledger-du ParseCcStmt.cs README repl.sh report tc ti to trend; do
+for i in bal bal-huquq entry getquote.pl getquote-uk.py ledger-du README repl.sh report tc ti to trend; do
     install -p -m0644 contrib/${i} %{buildroot}%{_pkgdocdir}/contrib/${i}
 done
 
 # Input samples
 mkdir -p %{buildroot}%{_pkgdocdir}/samples
-for i in demo.ledger drewr3.dat drewr.dat sample.dat wow.dat; do
+for i in demo.ledger divzero.dat drewr3.dat drewr.dat sample.dat standard.dat transfer.dat wow.dat; do
     install -p -m0644 test/input/${i} %{buildroot}%{_pkgdocdir}/samples/${i}
 done
 
