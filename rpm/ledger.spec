@@ -1,7 +1,7 @@
 %{!?_pkgdocdir: %global _pkgdocdir %{_docdir}/%{name}-%{version}}
 
 Name:             ledger
-Version:          3.1.3
+Version:          3.2.1
 Release:          1%{?dist}
 Summary:          A powerful command-line double-entry accounting system
 License:          BSD
@@ -17,7 +17,6 @@ BuildRequires:    gettext-devel
 BuildRequires:    gmp-devel
 BuildRequires:    libedit-devel
 BuildRequires:    mpfr-devel
-BuildRequires:    python2-devel
 BuildRequires:    /usr/bin/python
 
 Requires(post):   /sbin/ldconfig
@@ -29,13 +28,6 @@ from the UNIX command-line. This may put off some users as there is
 no flashy UI but for those who want unparalleled reporting access to
 their data, there really is no alternative.
 
-%package -n python2-ledger
-Provides: python2-ledger
-Summary: Python bindings for %{name}
-Requires: %{name} = %{version}-%{release}
-%description -n python2-ledger
-Python bindings for ledger.
-
 %package devel
 Summary: Libraries and header files for %{name} development
 Requires: %{name} = %{version}-%{release}
@@ -43,14 +35,13 @@ Requires: %{name} = %{version}-%{release}
 Libraries and header files for %{name} development.
 
 %prep
-%setup -qn %{name}-%{version}
+%setup -qn %{name}-%{version}/ledger
 
 %build
-python ./acprep --no-git --python --prefix=%{_prefix} update
+python ./acprep --no-git --prefix=%{_prefix} update
 
 %install
 make install DESTDIR=%{buildroot}
-chmod +x %{buildroot}%{_libdir}/python2.7/site-packages/ledger.so
 
 # Bash completion
 mkdir -p %{buildroot}%{_sysconfdir}/bash_completion.d
@@ -66,16 +57,11 @@ for i in bal bal-huquq entry getquote.pl getquote-uk.py ledger-du ParseCcStmt.cs
     install -p -m0644 contrib/${i} %{buildroot}%{_pkgdocdir}/contrib/${i}
 done
 
-# Python example
-mkdir -p %{buildroot}%{_pkgdocdir}/python
-install -p -m0644 python/demo.py %{buildroot}%{_pkgdocdir}/python/demo.py
-
 # Input samples
 mkdir -p %{buildroot}%{_pkgdocdir}/samples
 for i in demo.ledger drewr3.dat drewr.dat sample.dat wow.dat; do
     install -p -m0644 test/input/${i} %{buildroot}%{_pkgdocdir}/samples/${i}
 done
-
 
 %check
 
@@ -92,15 +78,14 @@ done
 %config(noreplace) %{_sysconfdir}/bash_completion.d/ledger
 %license LICENSE.md
 
-%files -n python2-ledger
-%doc %{_pkgdocdir}/python
-%{_libdir}/python2.7/site-packages/ledger.so
-
 %files devel
 %{_includedir}/ledger
 %{_libdir}/libledger.so
 
 %changelog
+* Sat Oct 09 2021 Renaud Casenave-Péré <renaud@casenave-pere.fr> - 3.2.1-1
+- New upstream release
+- Adapt for OBS
 * Wed May 01 2019 Renaud Casenave-Péré <renaud@casenave-pere.fr> - 3.1.3-1
 - New upstream release
 * Sun Jan 06 2019 Renaud Casenave-Péré <renaud@casenave-pere.fr> - 3.1.1-1
