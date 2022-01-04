@@ -28,6 +28,13 @@ from the UNIX command-line. This may put off some users as there is
 no flashy UI but for those who want unparalleled reporting access to
 their data, there really is no alternative.
 
+Type: console-application
+Custom:
+  Repo: https://github.com/ledger/ledger
+Categories:
+  - Office
+  - Finance
+
 %package devel
 Summary: Libraries and header files for %{name} development
 Requires: %{name} = %{version}-%{release}
