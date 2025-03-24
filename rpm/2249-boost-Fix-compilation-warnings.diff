@@ -1,0 +1,77 @@
+diff --git a/src/account.h b/src/account.h
+index be8fddaf6..7ea0e2691 100644
+--- a/src/account.h
++++ b/src/account.h
+@@ -45,6 +45,8 @@
+ 
+ namespace ledger {
+ 
++using namespace boost::placeholders;
++
+ class account_t;
+ class xact_t;
+ class post_t;
+diff --git a/src/filters.h b/src/filters.h
+index 6a4e6cf4c..18bf912d5 100644
+--- a/src/filters.h
++++ b/src/filters.h
+@@ -49,6 +49,8 @@
+ 
+ namespace ledger {
+ 
++using namespace boost::placeholders;
++
+ //////////////////////////////////////////////////////////////////////
+ //
+ // Posting collector
+diff --git a/src/op.h b/src/op.h
+index dcb0784d0..2fc87a716 100644
+--- a/src/op.h
++++ b/src/op.h
+@@ -45,6 +45,8 @@
+ 
+ namespace ledger {
+ 
++using namespace boost::placeholders;
++
+ class expr_t::op_t : public noncopyable
+ {
+   friend class expr_t;
+diff --git a/src/option.h b/src/option.h
+index 35b1c893e..274d0a958 100644
+--- a/src/option.h
++++ b/src/option.h
+@@ -47,6 +47,8 @@
+ 
+ namespace ledger {
+ 
++using namespace boost::placeholders;
++
+ class call_scope_t;
+ 
+ template <typename T>
+diff --git a/src/py_commodity.cc b/src/py_commodity.cc
+index 3ae6801f7..4eb6aca44 100644
+--- a/src/py_commodity.cc
++++ b/src/py_commodity.cc
+@@ -42,6 +42,7 @@ namespace ledger {
+ using namespace flags;
+ using namespace python;
+ using namespace boost::python;
++using namespace boost::placeholders;
+ 
+ namespace {
+ 
+diff --git a/src/system.hh.in b/src/system.hh.in
+index 95dedbc2f..10086d237 100644
+--- a/src/system.hh.in
++++ b/src/system.hh.in
+@@ -131,7 +131,7 @@
+ 
+ #include <boost/algorithm/string.hpp>
+ #include <boost/any.hpp>
+-#include <boost/bind.hpp>
++#include <boost/bind/bind.hpp>
+ #include <boost/cast.hpp>
+ #include <boost/current_function.hpp>
+ 
