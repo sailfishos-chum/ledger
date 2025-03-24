@@ -7,8 +7,10 @@ Summary:          A powerful command-line double-entry accounting system
 License:          BSD
 URL:              http://ledger-cli.org/
 Source0:          https://github.com/ledger/ledger/archive/v%{version}.tar.gz#/%{name}-%{version}.tar.gz
+#                 https://github.com/ledger/ledger/pull/2036
+Patch1:           2036-fix-compilation-with-boost-1.76.diff
 #                 https://github.com/ledger/ledger/pull/2249
-Patch1:           2249-boost-Fix-compilation-warnings.diff
+Patch2:           2249-boost-Fix-compilation-warnings.diff
 
 BuildRequires:    boost-devel
 BuildRequires:    cmake

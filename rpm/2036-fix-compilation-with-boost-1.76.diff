@@ -1,0 +1,26 @@
+diff --git a/src/expr.cc b/src/expr.cc
+index c8945d3da..c19bba98a 100644
+--- a/src/expr.cc
++++ b/src/expr.cc
+@@ -35,6 +35,8 @@
+ #include "parser.h"
+ #include "scope.h"
+ 
++#include <boost/smart_ptr/scoped_ptr.hpp>
++
+ namespace ledger {
+ 
+ expr_t::expr_t() : base_type()
+diff --git a/src/format.h b/src/format.h
+index 15431cf11..48c690bec 100644
+--- a/src/format.h
++++ b/src/format.h
+@@ -45,6 +45,8 @@
+ #include "expr.h"
+ #include "unistring.h"
+ 
++#include <boost/smart_ptr/scoped_ptr.hpp>
++
+ namespace ledger {
+ 
+ class unistring;
