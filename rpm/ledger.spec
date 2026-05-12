@@ -1,7 +1,7 @@
 %{!?_pkgdocdir: %global _pkgdocdir %{_docdir}/%{name}-%{version}}
 
 Name:             ledger
-Version:          3.2.1
+Version:          3.4.1
 Release:          1%{?dist}
 Summary:          A powerful command-line double-entry accounting system
 License:          BSD
@@ -90,10 +90,15 @@ done
 %{_libdir}/libledger.so
 
 %changelog
+* Tue May 12 2026 Renaud Casenave-Péré <renaud@casenave-pere.fr> - 3.4.1-1
+- New upstream release
+
 * Sat Oct 09 2021 Renaud Casenave-Péré <renaud@casenave-pere.fr> - 3.2.1-1
 - New upstream release
 - Adapt for OBS
+
 * Wed May 01 2019 Renaud Casenave-Péré <renaud@casenave-pere.fr> - 3.1.3-1
 - New upstream release
+
 * Sun Jan 06 2019 Renaud Casenave-Péré <renaud@casenave-pere.fr> - 3.1.1-1
 - Initial release for sailfishos
