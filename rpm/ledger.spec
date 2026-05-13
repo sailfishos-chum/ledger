@@ -7,6 +7,7 @@ Summary:          A powerful command-line double-entry accounting system
 License:          BSD
 URL:              http://ledger-cli.org/
 Source0:          https://github.com/ledger/ledger/archive/v%{version}.tar.gz#/%{name}-%{version}.tar.gz
+Patch0:           0001-Remove-incorrect-and-useless-gmp-version-check.patch
 
 BuildRequires:    boost-devel
 BuildRequires:    cmake
@@ -42,7 +43,7 @@ Requires: %{name} = %{version}-%{release}
 Libraries and header files for %{name} development.
 
 %prep
-%setup -qn %{name}-%{version}/ledger
+%autosetup -n %{name}-%{version}/ledger -p1
 
 %build
 python3 ./acprep --no-git --prefix=%{_prefix} update
@@ -56,7 +57,7 @@ install -p -m0644 contrib/ledger-completion.bash \
     %{buildroot}%{_sysconfdir}/bash_completion.d/ledger
 
 # Install documentation manually to a convenient directory layout
-rm -rf %{buildroot}%{_docdir}
+rm -rf %{buildroot}%{_datadir}/contrib
 
 # Contrib scripts
 mkdir -p %{buildroot}%{_pkgdocdir}/contrib
@@ -92,6 +93,7 @@ done
 %changelog
 * Tue May 12 2026 Renaud Casenave-Péré <renaud@casenave-pere.fr> - 3.4.1-1
 - New upstream release
+- Remove gmp version check
 
 * Sat Oct 09 2021 Renaud Casenave-Péré <renaud@casenave-pere.fr> - 3.2.1-1
 - New upstream release
